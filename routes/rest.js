@@ -88,4 +88,14 @@ restRouter.get('/users', verifyToken, async (req, res) => {
   }
 });
 
+restRouter.get('/test', async (req, res) => {
+  try {
+    const users = await User.find({}, 'username');
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = restRouter;
